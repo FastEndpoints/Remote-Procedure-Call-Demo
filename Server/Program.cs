@@ -1,16 +1,15 @@
 ﻿using Contracts;
 using FastEndpoints;
-using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Warehouse;
 
-var bld = new HostApplicationBuilder();
-bld.Services.AddHandlerServer(s =>
-{
-    s.Host = "localhost";
-    s.Port = 6000;
-    s.MapHandler<CreateOrderCommand, CreateOrderHandler, CreateOrderResult>();
-});
+var bld = WebApplication.CreateBuilder();
+bld.WebHost.ConfigureKestrel(o => o.ListenLocalhost(6000, o => o.Protocols = HttpProtocols.Http2));
+bld.AddHandlerServer();
 
 var app = bld.Build();
-app.StartHandlerServer();
+app.MapHandlers(h =>
+{
+    h.Register<CreateOrderCommand, CreateOrderHandler, CreateOrderResult>();
+});
 app.Run();

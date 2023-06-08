@@ -9,11 +9,11 @@ app.MapRemoteHandlers("http://localhost:6000", c =>
     c.Register<CreateOrderCommand, CreateOrderResult>();
 });
 
-app.MapGet("/", async () =>
+app.MapGet("/{id}", async (int id) =>
 {
     var result = await new CreateOrderCommand
     {
-        OrderId = 1010,
+        OrderId = id,
         CustomerName = "Holly Simms"
     }
     .RemoteExecuteAsync();
