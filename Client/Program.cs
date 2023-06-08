@@ -3,7 +3,6 @@ using FastEndpoints;
 
 var bld = WebApplication.CreateBuilder();
 var app = bld.Build();
-
 app.MapRemoteHandlers("http://localhost:6000", c =>
 {
     c.Register<CreateOrderCommand, CreateOrderResult>();
