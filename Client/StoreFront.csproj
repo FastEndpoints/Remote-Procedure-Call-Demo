@@ -8,8 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FastEndpoints.Messaging.Remote" Version="5.11.0.4-beta" />
-    <!--<ProjectReference Include="..\..\..\SOURCE-CONTROL\FastEndpoints\Library\Src\Messaging.Remote\FastEndpoints.Messaging.Remote.csproj" />-->
+    <PackageReference Include="FastEndpoints.Messaging.Remote" Version="5.11.0.5-beta" />
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
   </ItemGroup>
   

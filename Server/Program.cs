@@ -11,5 +11,6 @@ var app = bld.Build();
 app.MapHandlers(h =>
 {
     h.Register<CreateOrderCommand, CreateOrderHandler, CreateOrderResult>();
+    h.RegisterServerStream<StatusStreamCommand, StatusUpdateHandler, StatusUpdate>();
 });
 app.Run();
