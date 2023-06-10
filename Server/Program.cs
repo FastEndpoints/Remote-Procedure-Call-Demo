@@ -12,5 +12,6 @@ app.MapHandlers(h =>
 {
     h.Register<CreateOrderCommand, CreateOrderHandler, CreateOrderResult>();
     h.RegisterServerStream<StatusStreamCommand, StatusUpdateHandler, StatusUpdate>();
+    h.RegisterClientStream<CurrentPosition, PositionProgressHandler, ProgressReport>();
 });
 app.Run();
