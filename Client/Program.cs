@@ -8,6 +8,7 @@ app.MapRemoteHandlers("http://localhost:6000", c =>
 {
     c.Register<CreateOrderCommand, CreateOrderResult>();
     c.RegisterServerStream<StatusStreamCommand, StatusUpdate>();
+
 });
 
 app.MapGet("/{id}", async (int id) =>
