@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FastEndpoints.Messaging.Core" Version="5.11.0.6-beta" />
+    <PackageReference Include="FastEndpoints.Messaging.Core" Version="5.*" />
     <!--<ProjectReference Include="..\..\FastEndpoints\Library\Src\Messaging.Core\FastEndpoints.Messaging.Core.csproj" />-->
   </ItemGroup>
 
