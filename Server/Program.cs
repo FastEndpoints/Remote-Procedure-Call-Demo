@@ -10,6 +10,7 @@ bld.AddHandlerServer();
 var app = bld.Build();
 app.MapHandlers(h =>
 {
+    h.Register<SayHelloCommand, SayHelloHandler>();
     h.Register<CreateOrderCommand, CreateOrderHandler, CreateOrderResult>();
     h.RegisterServerStream<StatusStreamCommand, StatusUpdateHandler, StatusUpdate>();
     h.RegisterClientStream<CurrentPosition, PositionProgressHandler, ProgressReport>();

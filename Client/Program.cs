@@ -7,9 +7,22 @@ var bld = WebApplication.CreateBuilder();
 var app = bld.Build();
 app.MapRemoteHandlers("http://localhost:6000", c =>
 {
+    c.Register<SayHelloCommand>();
     c.Register<CreateOrderCommand, CreateOrderResult>();
     c.RegisterServerStream<StatusStreamCommand, StatusUpdate>();
     c.RegisterClientStream<CurrentPosition, ProgressReport>();
+});
+
+//VOID TEST
+app.MapGet("/", async () =>
+{
+    await new SayHelloCommand
+    {
+        From = "mars"
+    }
+    .RemoteExecuteAsync();
+
+    return Results.Ok();
 });
 
 //UNARY TEST
