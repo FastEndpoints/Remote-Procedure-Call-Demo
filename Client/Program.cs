@@ -1,16 +1,20 @@
 ﻿using Contracts;
 using FastEndpoints;
 using Grpc.Core;
+using StoreFront;
 using System.Runtime.CompilerServices;
 
 var bld = WebApplication.CreateBuilder();
 var app = bld.Build();
-app.MapRemoteHandlers("http://localhost:6000", c =>
+
+//todo: rename to MapRemote()
+app.MapRemote("http://localhost:6000", c =>
 {
     c.Register<SayHelloCommand>();
     c.Register<CreateOrderCommand, CreateOrderResult>();
     c.RegisterServerStream<StatusStreamCommand, StatusUpdate>();
     c.RegisterClientStream<CurrentPosition, ProgressReport>();
+    c.Subscribe<SomethingHappened, WhenSomethingHappens>();
 });
 
 //VOID TEST

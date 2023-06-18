@@ -1,0 +1,9 @@
+###
+
+GET http://localhost:5001/event/AAAAAA
+
+###
+
+GET http://localhost:5001/event/BBBBBB
+
+###
