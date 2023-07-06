@@ -23,7 +23,7 @@ app.MapHandlers(h =>
 
 app.MapGet("/event/{name}", async (string name) =>
 {
-    for (int i = 1; i <= 100; i++)
+    for (int i = 1; i <= 10; i++)
     {
         new SomethingHappened
         {
