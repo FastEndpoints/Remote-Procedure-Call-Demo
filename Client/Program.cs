@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 var bld = WebApplication.CreateBuilder();
 var app = bld.Build();
 
-//todo: rename to MapRemote()
 app.MapRemote("http://localhost:6000", c =>
 {
     c.Register<SayHelloCommand>();
