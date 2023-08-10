@@ -38,3 +38,5 @@ app.MapGet("/event/{name}", async (string name) =>
 });
 
 app.Run();
+
+namespace Warehouse { public partial class Program { }; }

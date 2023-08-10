@@ -84,3 +84,5 @@ app.MapGet("/client-stream", async (CancellationToken ct) =>
 });
 
 app.Run();
+
+namespace StoreFront { public partial class Program { }; }
