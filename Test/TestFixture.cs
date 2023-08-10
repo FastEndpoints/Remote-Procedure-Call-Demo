@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using FastEndpoints.Messaging.Remote.Testing;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 
