@@ -10,7 +10,7 @@ public class TestFixture : IDisposable
     public HttpClient StoreFrontClient { get; set; }
 
     private readonly WebApplicationFactory<Warehouse.Program> _warehouse = new();
-    private readonly WebApplicationFactory<StoreFront.Program> _rpcClient = new();
+    private readonly WebApplicationFactory<StoreFront.Program> _storefront = new();
 
     public TestFixture()
     {
@@ -22,7 +22,7 @@ public class TestFixture : IDisposable
             });
         }).Server;
 
-        StoreFrontClient = _rpcClient.WithWebHostBuilder(c =>
+        StoreFrontClient = _storefront.WithWebHostBuilder(c =>
         {
             c.ConfigureTestServices(s =>
             {
@@ -41,7 +41,7 @@ public class TestFixture : IDisposable
             {
                 StoreFrontClient.Dispose();
                 _warehouse.Dispose();
-                _rpcClient.Dispose();
+                _storefront.Dispose();
             }
             disposedValue = true;
         }
