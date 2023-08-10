@@ -23,7 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\FastEndpoints\Library\Src\Messaging.Remote.Testing\FastEndpoints.Messaging.Remote.Testing.csproj" />
+      <PackageReference Include="FastEndpoints.Messaging.Remote.Testing" Version="5.*" />
+      <!--<ProjectReference Include="..\..\FastEndpoints\Library\Src\Messaging.Remote.Testing\FastEndpoints.Messaging.Remote.Testing.csproj" />-->
       <ProjectReference Include="..\Source\Client\StoreFront.csproj" />
       <ProjectReference Include="..\Source\Contracts\Contracts.csproj" />
       <ProjectReference Include="..\Source\Server\Warehouse.csproj" />
