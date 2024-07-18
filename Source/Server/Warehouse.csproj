@@ -8,9 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FastEndpoints.Messaging.Remote" Version="5.27.0" />
-        <!--<ProjectReference Include="..\..\..\FastEndpoints\Library\Src\Messaging.Remote\FastEndpoints.Messaging.Remote.csproj" />-->
-        <ProjectReference Include="..\Contracts\Contracts.csproj" />
+        <PackageReference Include="FastEndpoints.Messaging.Remote" Version="5.27.0.12-beta"/>
+        <!-- <ProjectReference Include="..\..\..\FastEndpoints\Src\Messaging\Messaging.Remote\FastEndpoints.Messaging.Remote.csproj"/> -->
+        <ProjectReference Include="..\Contracts\Contracts.csproj"/>
     </ItemGroup>
 
 </Project>

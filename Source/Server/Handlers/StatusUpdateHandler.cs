@@ -8,7 +8,7 @@ public sealed class StatusUpdateHandler : IServerStreamCommandHandler<StatusStre
 {
     public async IAsyncEnumerable<StatusUpdate> ExecuteAsync(StatusStreamCommand command, [EnumeratorCancellation] CancellationToken ct)
     {
-        for (int i = 1; !ct.IsCancellationRequested; i++)
+        for (var i = 1; !ct.IsCancellationRequested; i++)
         {
             try
             {
@@ -18,6 +18,7 @@ public sealed class StatusUpdateHandler : IServerStreamCommandHandler<StatusStre
             {
                 //do nothing
             }
+
             yield return new() { Message = $"Id: {command.Id} - {i}" };
         }
     }
