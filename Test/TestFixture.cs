@@ -9,8 +9,8 @@ public class TestFixture : IDisposable
 {
     public HttpClient StoreFrontClient { get; set; }
 
-    private readonly WebApplicationFactory<Warehouse.Program> _warehouse = new();
-    private readonly WebApplicationFactory<StoreFront.Program> _storefront = new();
+    readonly WebApplicationFactory<Warehouse.Program> _warehouse = new();
+    readonly WebApplicationFactory<StoreFront.Program> _storefront = new();
 
     public TestFixture()
     {
@@ -32,7 +32,8 @@ public class TestFixture : IDisposable
     }
 
     #region disposable
-    private bool disposedValue;
+
+    bool disposedValue;
     protected virtual void Dispose(bool disposing)
     {
         if (!disposedValue)

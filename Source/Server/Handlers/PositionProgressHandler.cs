@@ -5,7 +5,7 @@ namespace Warehouse;
 
 public sealed class PositionProgressHandler : IClientStreamCommandHandler<CurrentPosition, ProgressReport>
 {
-    private readonly ILogger<PositionProgressHandler> logger;
+    readonly ILogger<PositionProgressHandler> logger;
 
     public PositionProgressHandler(ILogger<PositionProgressHandler> logger)
     {

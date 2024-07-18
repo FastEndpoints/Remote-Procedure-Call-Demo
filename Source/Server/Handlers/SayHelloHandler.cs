@@ -5,7 +5,7 @@ namespace Warehouse;
 
 public sealed class SayHelloHandler : ICommandHandler<SayHelloCommand>
 {
-    private readonly ILogger<SayHelloHandler> logger;
+    readonly ILogger<SayHelloHandler> logger;
 
     public SayHelloHandler(ILogger<SayHelloHandler> logger)
     {

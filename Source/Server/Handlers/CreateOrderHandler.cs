@@ -5,7 +5,7 @@ namespace Warehouse;
 
 public sealed class CreateOrderHandler : ICommandHandler<CreateOrderCommand, CreateOrderResult>
 {
-    private readonly ILogger<CreateOrderHandler> logger;
+    readonly ILogger<CreateOrderHandler> logger;
 
     public CreateOrderHandler(ILogger<CreateOrderHandler> logger)
     {

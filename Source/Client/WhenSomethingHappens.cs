@@ -3,9 +3,9 @@ using FastEndpoints;
 
 namespace StoreFront;
 
-internal class WhenSomethingHappens : IEventHandler<SomethingHappened>
+class WhenSomethingHappens : IEventHandler<SomethingHappened>
 {
-    private readonly ILogger<WhenSomethingHappens> _logger;
+    readonly ILogger<WhenSomethingHappens> _logger;
 
     public WhenSomethingHappens(ILogger<WhenSomethingHappens> logger)
     {
