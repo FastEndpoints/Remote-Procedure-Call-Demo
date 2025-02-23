@@ -8,7 +8,7 @@ var bld = WebApplication.CreateBuilder();
 var app = bld.Build();
 
 app.MapRemote(
-    "http://localhost:6000",
+    "WAREHOUSE", //http://localhost:6000
     c =>
     {
         c.Register<SayHelloCommand>();

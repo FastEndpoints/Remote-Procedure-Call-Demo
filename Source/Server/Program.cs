@@ -7,7 +7,8 @@ var bld = WebApplication.CreateBuilder();
 bld.WebHost.ConfigureKestrel(
     k =>
     {
-        k.ListenLocalhost(6000, o => o.Protocols = HttpProtocols.Http2);         // for GRPC
+        //k.ListenLocalhost(6000, o => o.Protocols = HttpProtocols.Http2);       // for GRPC
+        k.ListenInterProcess("WAREHOUSE");                                       // for IPC
         k.ListenLocalhost(5001, o => o.Protocols = HttpProtocols.Http1AndHttp2); // for REST
     });
 bld.AddHandlerServer();
