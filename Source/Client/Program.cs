@@ -1,14 +1,14 @@
-﻿using Contracts;
+﻿using System.Runtime.CompilerServices;
+using Contracts;
 using FastEndpoints;
 using Grpc.Core;
 using StoreFront;
-using System.Runtime.CompilerServices;
 
 var bld = WebApplication.CreateBuilder();
 var app = bld.Build();
 
 app.MapRemote(
-    "WAREHOUSE", //http://localhost:6000
+    "WAREHOUSE", // <- unix socket. for tcp use: http://localhost:6000
     c =>
     {
         c.Register<SayHelloCommand>();
@@ -54,17 +54,17 @@ app.MapGet(
     {
         try
         {
-            var iterator = new StatusStreamCommand
+            var results = new StatusStreamCommand
                 {
                     Id = id
                 }
-                .RemoteExecuteAsync(new(cancellationToken: new CancellationTokenSource(5000).Token));
+                .RemoteExecuteAsync(new CancellationTokenSource(5000).Token);
 
             ctx.Response.StatusCode = 200;
             ctx.Response.ContentType = "application/json"; //just so the web browser will render the chunks
             await ctx.Response.StartAsync();
 
-            await foreach (var res in iterator)
+            await foreach (var res in results)
                 await ctx.Response.WriteAsync(res.Message + Environment.NewLine + Environment.NewLine);
         }
         catch (OperationCanceledException) { }
@@ -82,7 +82,7 @@ app.MapGet(
         try
         {
             report = await GetDataStream(cts.Token)
-                         .RemoteExecuteAsync<CurrentPosition, ProgressReport>(new(cancellationToken: cts.Token));
+                         .RemoteExecuteAsync<CurrentPosition, ProgressReport>(cts.Token);
         }
         catch (RpcException)
         {
@@ -114,5 +114,5 @@ app.Run();
 
 namespace StoreFront
 {
-    public class Program { };
+    public sealed class Program;
 }

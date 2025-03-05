@@ -2,6 +2,7 @@
 using FastEndpoints.Messaging.Remote.Testing;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Warehouse;
 
 namespace Test;
 
@@ -9,49 +10,37 @@ public class TestFixture : IDisposable
 {
     public HttpClient StoreFrontClient { get; set; }
 
-    readonly WebApplicationFactory<Warehouse.Program> _warehouse = new();
+    readonly WebApplicationFactory<Program> _warehouse = new();
     readonly WebApplicationFactory<StoreFront.Program> _storefront = new();
 
     public TestFixture()
     {
-        var warehouse = _warehouse.WithWebHostBuilder(c =>
-        {
-            c.ConfigureTestServices(s =>
+        var warehouse = _warehouse.WithWebHostBuilder(
+            c =>
             {
-                s.RegisterTestCommandHandler<SayHelloCommand, TestCommandHandler>();
-            });
-        }).Server;
+                c.ConfigureTestServices(
+                    s =>
+                    {
+                        s.RegisterTestCommandHandler<SayHelloCommand, TestCommandHandler>();
+                    });
+            }).Server;
 
-        StoreFrontClient = _storefront.WithWebHostBuilder(c =>
-        {
-            c.ConfigureTestServices(s =>
+        StoreFrontClient = _storefront.WithWebHostBuilder(
+            c =>
             {
-                s.RegisterTestRemote(warehouse);
-            });
-        }).CreateClient();
-    }
-
-    #region disposable
-
-    bool disposedValue;
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!disposedValue)
-        {
-            if (disposing)
-            {
-                StoreFrontClient.Dispose();
-                _warehouse.Dispose();
-                _storefront.Dispose();
-            }
-            disposedValue = true;
-        }
+                c.ConfigureTestServices(
+                    s =>
+                    {
+                        s.RegisterTestRemote(warehouse);
+                    });
+            }).CreateClient();
     }
 
     public void Dispose()
     {
-        Dispose(disposing: true);
+        StoreFrontClient.Dispose();
+        _warehouse.Dispose();
+        _storefront.Dispose();
         GC.SuppressFinalize(this);
     }
-    #endregion
 }

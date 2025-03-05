@@ -35,7 +35,7 @@ app.MapGet(
                     Id = i,
                     Description = name
                 }
-                .Broadcast(ct);
+                .Broadcast();
 
             await Task.Delay(1000);
         }

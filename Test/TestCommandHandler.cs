@@ -5,20 +5,20 @@ namespace Test;
 
 sealed class TestCommandHandler : ICommandHandler<SayHelloCommand>
 {
-    internal static SayHelloCommand? _received;
+    internal static SayHelloCommand? Received;
 
     public Task ExecuteAsync(SayHelloCommand c, CancellationToken ct)
     {
-        _received = c;
+        Received = c;
+
         return Task.CompletedTask;
     }
 
     public static async Task<bool> IsTestPassed()
     {
-        while (_received is null)
-        {
+        while (Received is null)
             await Task.Delay(100);
-        }
-        return _received.From == "mars";
+
+        return Received.From == "mars";
     }
 }
