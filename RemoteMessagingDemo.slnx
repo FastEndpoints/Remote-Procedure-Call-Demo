@@ -1,10 +1,10 @@
 <Solution>
-  <Folder Name="/REFs/">
+  <!-- <Folder Name="/REFs/">
     <Project Path="../FastEndpoints/Src/Messaging/Messaging.Core/FastEndpoints.Messaging.Core.csproj" />
     <Project Path="../FastEndpoints/Src/Messaging/Messaging.Remote.Core/FastEndpoints.Messaging.Remote.Core.csproj" />
     <Project Path="../FastEndpoints/Src/Messaging/Messaging.Remote.Testing/FastEndpoints.Messaging.Remote.Testing.csproj" />
     <Project Path="../FastEndpoints/Src/Messaging/Messaging.Remote/FastEndpoints.Messaging.Remote.csproj" />
-  </Folder>
+  </Folder> -->
   <Folder Name="/Source/">
     <Project Path="Source/Client/StoreFront.csproj" />
     <Project Path="Source/Contracts/Contracts.csproj" />
