@@ -2,7 +2,6 @@
 using FastEndpoints.Messaging.Remote.Testing;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Warehouse;
 
 namespace Test;
 
@@ -10,7 +9,7 @@ public class TestFixture : IDisposable
 {
     public HttpClient StoreFrontClient { get; set; }
 
-    readonly WebApplicationFactory<Program> _warehouse = new();
+    readonly WebApplicationFactory<Warehouse.Program> _warehouse = new();
     readonly WebApplicationFactory<StoreFront.Program> _storefront = new();
 
     public TestFixture()

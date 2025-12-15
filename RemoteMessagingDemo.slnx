@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Source/">
+    <Project Path="Source/Client/StoreFront.csproj" />
+    <Project Path="Source/Contracts/Contracts.csproj" />
+    <Project Path="Source/Server/Warehouse.csproj" />
+  </Folder>
+  <Folder Name="/Test/">
+    <Project Path="Test/Test.csproj" />
+  </Folder>
+</Solution>

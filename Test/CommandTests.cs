@@ -9,7 +9,7 @@ public class CommandTests(TestFixture fixture) : IClassFixture<TestFixture>
     [Fact]
     public async Task Void_Command_Handler_Is_Executed()
     {
-        var rsp = await StoreFrontClient.GetAsync("/");
+        var rsp = await StoreFrontClient.GetAsync("/", TestContext.Current.CancellationToken);
 
         Assert.Equal(HttpStatusCode.OK, rsp.StatusCode);
         Assert.True(await TestCommandHandler.IsTestPassed());
@@ -18,7 +18,7 @@ public class CommandTests(TestFixture fixture) : IClassFixture<TestFixture>
     [Fact]
     public async Task Unary_Command_Handler_Is_Executed()
     {
-        var res = await StoreFrontClient.GetStringAsync("/123");
+        var res = await StoreFrontClient.GetStringAsync("/123", TestContext.Current.CancellationToken);
 
         Assert.Equal("\"Result from remote handler: Order 123 created for Holly Simms\"", res);
     }

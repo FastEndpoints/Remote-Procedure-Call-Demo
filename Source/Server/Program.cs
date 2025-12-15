@@ -47,5 +47,5 @@ app.Run();
 
 namespace Warehouse
 {
-    public class Program { };
+    public class Program;
 }
