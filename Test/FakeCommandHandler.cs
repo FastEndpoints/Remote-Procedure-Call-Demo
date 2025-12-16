@@ -3,7 +3,7 @@ using FastEndpoints;
 
 namespace Test;
 
-sealed class TestCommandHandler : ICommandHandler<SayHelloCommand>
+sealed class FakeCommandHandler : ICommandHandler<SayHelloCommand>
 {
     internal static SayHelloCommand? Received;
 

@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using FastEndpoints;
 using FastEndpoints.Messaging.Remote.Testing;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -14,34 +15,36 @@ public class TestFixture : IDisposable
 
     public TestFixture()
     {
-        //get a reference to the TestServer of the grpc handler server/app
-        var warehouse = _warehouse.WithWebHostBuilder(
+        _warehouse = _warehouse.WithWebHostBuilder(
             c =>
             {
                 c.ConfigureTestServices(
                     s =>
                     {
-                        //fake command handlers can be registered for commands
-                        s.RegisterTestCommandHandler<SayHelloCommand, TestCommandHandler>();
+                        s.RegisterTestCommandHandler<SayHelloCommand, FakeCommandHandler>(); //fake command handlers can be registered for commands
+                        s.RegisterTestCommandReceivers();                                    //enables to verify a certain command was received by the handler server
                     });
-            }).Server;
+            });
+
+        _storefront = _storefront.WithWebHostBuilder(
+            c =>
+            {
+                c.ConfigureTestServices(
+                    s =>
+                    {
+                        s.RegisterTestRemote(_warehouse.Server); //connect the test remote/grpc server to the client app
+                    });
+            });
 
         //create and store a httpclient for calling endpoints on the client app
-        StoreFrontClient = _storefront.WithWebHostBuilder(
-            c =>
-            {
-                c.ConfigureTestServices(
-                    s =>
-                    {
-                        //connect the test remote/grpc server to the client app
-                        s.RegisterTestRemote(warehouse);
-                    });
-            }).CreateClient();
+        StoreFrontClient = _storefront.CreateClient();
     }
+
+    public ICommandReceiver<TCommand> GetCommandReceiverForWarehouse<TCommand>() where TCommand : ICommandBase
+        => _warehouse.Services.GetTestCommandReceiver<TCommand>(); //a command receiver for a given command type can be obtained like this.
 
     public void Dispose()
     {
-        StoreFrontClient.Dispose();
         _warehouse.Dispose();
         _storefront.Dispose();
         GC.SuppressFinalize(this);
